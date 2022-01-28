@@ -1,0 +1,63 @@
+{
+  "name": "simple-micro-front-end-framework",
+  "version": "1.0.0",
+  "description": "A simple micro front end framework ",
+  "main": "./lib/index.cjs.js",
+  "module": "./lib/index.esm.js",
+  "types": "./lib/index.d.ts",
+  "files": ["lib"],
+  "scripts": { 
+	  "dev": "rollup -w -c", 
+ 	  "build": "rollup -c",
+    "clean": "rimraf lib",
+    "lint:check": "eslint ./src",
+    "lint:fix": "yarn lint:check --fix",
+    "prettier:check": "prettier --check ./src",
+    "prettier:fix": "prettier --write ./src",
+    "format:check": "yarn lint:check && yarn prettier:check",
+    "format:fix": "yarn lint:fix && yarn prettier:fix"
+  }, 
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,ts,json,md}": [
+      "prettier -w"
+    ],
+    "**/*.{js,ts}": [
+      "yarn lint:fix"
+    ]
+  },
+  "browserslist": [
+    "ie >= 11",
+    "last 4 Safari major versions",
+    "last 10 Chrome major versions",
+    "last 10 Firefox major versions",
+    "last 4 Edge major versions"
+  ],
+  "ignore": [
+    "examples"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^16.1.0",
+    "@commitlint/config-conventional": "^16.0.0",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
+    "eslint": "^8.7.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.2",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.66.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.5"
+  }
+}
