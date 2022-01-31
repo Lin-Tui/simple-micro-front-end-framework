@@ -9,6 +9,18 @@
     "lib"
   ],
   "scripts": {
+    "examples:install": "npm-run-all --serial build install:*",
+    "examples:start": "npm-run-all --parallel start:*",
+    "install:main": "cd examples/main && npm i",
+    "start:main": "cd examples/main && npm start",
+    "install:react17": "cd examples/react17 && npm i",
+    "start:react17": "cd examples/react17 && npm start",
+    "install:vue2": "cd examples/vue2 && npm i",
+    "start:vue2": "cd examples/vue2 && npm start",
+    "install:vue3": "cd examples/vue3 && npm i",
+    "start:vue3": "cd examples/vue3 && npm start",
+    "install:purehtml": "cd examples/purehtml && npm i",
+    "start1:purehtml": "cd examples/purehtml && npm start",
     "dev": "rollup -w -c",
     "build": "rollup -c",
     "clean": "rimraf lib",
