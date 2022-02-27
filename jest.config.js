@@ -6,4 +6,7 @@ module.exports = {
   roots: [
     "<rootDir>/tests"
   ],
+  moduleNameMapper: {
+    "simple-micro-front-end-framework": "<rootDir>/src/index.ts",
+  },
 };

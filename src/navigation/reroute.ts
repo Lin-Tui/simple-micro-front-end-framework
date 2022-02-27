@@ -1,9 +1,3 @@
+import { getAppChanges } from '../applications/app';
 
-import {getAppChanges} from '../applications/app';
-
-export function reroute() {
-    
-
-
-
-}
+export function reroute() {}

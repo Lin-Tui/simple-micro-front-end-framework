@@ -1,4 +1,3 @@
-
 export type ObjectType = Record<string, any>;
 export type AppProps = {
     name: string;
@@ -11,45 +10,32 @@ export type LifeCycles = {
     bootstrap: LifeCycleFn | Array<LifeCycleFn>;
     mount: LifeCycleFn | Array<LifeCycleFn>;
     unmount: LifeCycleFn | Array<LifeCycleFn>;
-}
+};
 
 export type AppLoad = LifeCycleFn | LifeCycles;
 
-export type ActivityFn = (location: Location)=> boolean;
- 
+export type ActivityFn = (location: Location) => boolean;
+
 export type Activity = ActivityFn | string;
 
 export type RegisterApplicationConfig = {
     name: string;
     app: AppLoad;
     activeWhen: Activity;
-    customProps: ObjectType; 
-}
+    customProps: ObjectType;
+};
 
 export type StandardRegisterApplicationConfig = {
     name: string;
     app: LifeCycleFn;
     activeWhen: ActivityFn;
     customProps: ObjectType;
-}
-
-export type Status = 
-| "NOT_LOADED"
-| "LOADING_SOURCE_CODE"
-| "NOT_BOOTSTRAPPED"
-| "BOOTSTRAPPING"
-| "NOT_MOUNTED"
-| "MOUNTING"
-| "MOUNTED"
-| "UNMOUNTING"
-| "UNLOADING"
-| "LOAD_ERROR"
-| "SKIP_BECAUSE_BROKEN";
+};
 
 export type ApplicationInfo = {
     loadErrorTime: any;
-    status: Status;
-}
+    status: string;
+};
 
 export type Application = ApplicationInfo & StandardRegisterApplicationConfig;
 
@@ -58,4 +44,4 @@ export type AppChanges = {
     appsToMount: Array<Application>;
     appsToUnmount: Array<Application>;
     appsToUnload: Array<Application>;
-}
+};

@@ -1,4 +1,3 @@
-
 export const AppStatus = {
     // 子应用注册以后的初始状态、注册未加载
     NOT_LOADED: 'NOT_LOADED',
@@ -23,4 +22,4 @@ export const AppStatus = {
     LOAD_ERROR: 'LOAD_ERROR',
     // 执行期间出错
     SKIP_BECAUSE_BROKEN: 'SKIP_BECAUSE_BROKEN'
-}
+};

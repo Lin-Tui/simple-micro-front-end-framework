@@ -1,5 +1,5 @@
 module.exports =  {
-    printWidth: 100, // 每行最大字符数，超过会换行，默认80
+    printWidth: 80, // 每行最大字符数，超过会换行，默认80
     semi: true, // 是否在行尾加分号。
     singleQuote: true, // 是否使用单引号而不是使用双引号。
     trailingComma: "none", // 是否使用尾逗号，可选值"<none|es5|all>"，默认none
@@ -9,4 +9,5 @@ module.exports =  {
     arrowParens: "avoid",  // 箭头函数参数使用圆括号包裹 比如 (x) => x 和 x => x 的区别，"always"( 默认) 总是包裹； "avoid" 尽可能避免包裹
   	endOfLine: "lf",
   	quoteProps: "as-needed", //对象中的属性名加引号的方式。取 as-needed | consistent | preserve,默认 as-needed  
+    
   };
