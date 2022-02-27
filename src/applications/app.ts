@@ -1,7 +1,6 @@
 import { AppStatus } from '../config';
 import {
     RegisterApplicationConfig,
-    StandardRegisterApplicationConfig,
     ActivityFn,
     Activity,
     Application,
@@ -13,30 +12,38 @@ import { reroute } from '../navigation/reroute';
 import { handleError } from '../utils/index';
 const apps: Array<Application> = [];
 
+let started = false;
+
 export function getAppsName(): Array<string> {
     return apps.map(item => item.name);
 }
 
 export function registerApplication(config: RegisterApplicationConfig): void {
-    const registerConfig: StandardRegisterApplicationConfig = {
+    const registerConfig: Application = {
         name: '',
         app: () => Promise.resolve(),
         activeWhen: () => false,
-        customProps: {}
+        customProps: {},
+        status: AppStatus.NOT_LOADED,
+        loadErrorTime: null
     };
     registerConfig.name = config.name;
+    if (getAppsName().includes(config.name)) {
+        handleError(
+            '该应用已存在，请勿重复注册！',
+            registerConfig,
+            AppStatus.SKIP_BECAUSE_BROKEN
+        );
+        return;
+    }
     registerConfig.customProps = config.customProps;
     registerConfig.activeWhen = sanitizeActiveWhen(config.activeWhen);
     registerConfig.app = sanitizeApp(config.app);
-    apps.push({
-        status: AppStatus.NOT_LOADED,
-        loadErrorTime: null,
-        ...registerConfig
-    });
+    apps.push(registerConfig);
     reroute();
 }
 
-export function getAppChanges(apps: Array<Application>): AppChanges {
+export function getAppChanges(): AppChanges {
     const appsToLoad: Array<Application> = [],
         appsToMount: Array<Application> = [],
         appsToUnmount: Array<Application> = [],
@@ -73,6 +80,15 @@ export function getAppChanges(apps: Array<Application>): AppChanges {
         appsToUnmount,
         appsToUnload
     };
+}
+
+export function start() {
+    started = true;
+    reroute();
+}
+
+export function isStarted() {
+    return Boolean(started);
 }
 
 function shouldActive(app: Application): boolean {
