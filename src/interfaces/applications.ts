@@ -4,12 +4,13 @@ export type AppProps = {
     singleSpa: any;
 };
 
-export type LifeCycleFn = (config: ObjectType & AppProps) => Promise<any>;
+export type LifeCycleFn = (config?: ObjectType & AppProps) => Promise<any>;
 
 export type LifeCycles = {
-    bootstrap: LifeCycleFn | Array<LifeCycleFn>;
-    mount: LifeCycleFn | Array<LifeCycleFn>;
-    unmount: LifeCycleFn | Array<LifeCycleFn>;
+    bootstrap?: LifeCycleFn | Array<LifeCycleFn>;
+    mount?: LifeCycleFn | Array<LifeCycleFn>;
+    unmount?: LifeCycleFn | Array<LifeCycleFn>;
+    unload?: LifeCycleFn | Array<LifeCycleFn>;
 };
 
 export type AppLoad = LifeCycleFn | LifeCycles;
@@ -27,7 +28,7 @@ export type RegisterApplicationConfig = {
 
 export type StandardRegisterApplicationConfig = {
     name: string;
-    app: LifeCycleFn;
+    loadApp: LifeCycleFn;
     activeWhen: ActivityFn;
     customProps: ObjectType;
 };
@@ -37,7 +38,9 @@ export type ApplicationInfo = {
     status: string;
 };
 
-export type Application = ApplicationInfo & StandardRegisterApplicationConfig;
+export type Application = ApplicationInfo &
+    StandardRegisterApplicationConfig &
+    LifeCycles;
 
 export type AppChanges = {
     appsToLoad: Array<Application>;

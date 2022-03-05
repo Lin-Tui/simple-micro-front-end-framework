@@ -21,7 +21,7 @@ export function getAppsName(): Array<string> {
 export function registerApplication(config: RegisterApplicationConfig): void {
     const registerConfig: Application = {
         name: '',
-        app: () => Promise.resolve(),
+        loadApp: () => Promise.resolve(),
         activeWhen: () => false,
         customProps: {},
         status: AppStatus.NOT_LOADED,
@@ -38,7 +38,7 @@ export function registerApplication(config: RegisterApplicationConfig): void {
     }
     registerConfig.customProps = config.customProps;
     registerConfig.activeWhen = sanitizeActiveWhen(config.activeWhen);
-    registerConfig.app = sanitizeApp(config.app);
+    registerConfig.loadApp = sanitizeApp(config.app);
     apps.push(registerConfig);
     reroute();
 }
